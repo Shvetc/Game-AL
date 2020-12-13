@@ -1,24 +1,30 @@
-#include "SFML/Graphics.hpp"
+#include <SFML/Graphics.hpp>
 #include <iostream>
+#include "Player.h"
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Red);
+    sf::RenderWindow window(sf::VideoMode(500, 500), "SFML works!");
+    //sf::CircleShape shape(50.f);
+   // shape.setFillColor(sf::Color::Red);
+    //shape.setPosition(250,250);
+    Player player;
 
     while (window.isOpen())
     {
-        sf::Event event;
+       sf::Event event;
         while (window.pollEvent(event))
         {
+            
             if (event.type == sf::Event::Closed)
                 window.close();
-            if (event.type == sf::Event::MouseButtonPressed)
-                std::cout << "MouseButtonPressed\n";
+            player.handle(event);
+           
+             
         }
 
+
         window.clear();
-        window.draw(shape);
+        window.draw(player.get_shape());
         window.display();
     }
 
